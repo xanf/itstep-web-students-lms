@@ -1,8 +1,24 @@
+import { useQuery } from '@tanstack/react-query'
+import { getCourses } from '../../api/courses.js'
+
 export function CourseCatalog() {
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ['courses'],
+    queryFn: getCourses,
+  })
+
+  if (isLoading) return <div>Завантаження...</div>
+  if (isError) return <div>Помилка завантаження</div>
+
   return (
-    <div style={{ padding: 24, fontFamily: 'monospace', lineHeight: 1.6 }}>
-      <h2 style={{ margin: 0 }}>src/routes/catalog/CourseCatalog.jsx</h2>
-      <p style={{ color: '#666' }}>Реалізуйте цей екран самостійно.</p>
+    <div>
+      {data.data.map((course) => (
+        <div key={course.id}>
+          <p>{course.title}</p>
+          <p>{course.description}</p>
+          <p>{course.instructor.fullName}</p>
+        </div>
+      ))}
     </div>
   )
 }
