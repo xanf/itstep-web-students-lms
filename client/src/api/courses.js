@@ -32,3 +32,5 @@ export const deleteCourse = (id) => apiClient.delete(`/courses/${id}`)
 export const hideEnrollment = (enrollmentId) => apiClient.post(`/enrollments/${enrollmentId}/hide`)
 
 export const unhideEnrollment = (enrollmentId) => apiClient.post(`/enrollments/${enrollmentId}/unhide`)
+
+export const duplicateCourse = (id) => apiClient.post(`/courses/${id}/duplicate`)

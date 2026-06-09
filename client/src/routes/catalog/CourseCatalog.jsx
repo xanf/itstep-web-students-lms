@@ -43,7 +43,7 @@ import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'
 import dayjs from 'dayjs'
 import 'dayjs/locale/uk'
 import { useAuth } from '../../auth/useAuth.js'
-import { createCourse, deleteCourse, enrollCourse, getCourse, getCourses, getEnrollments, hideEnrollment, unhideEnrollment, updateCourse } from '../../api/courses.js'
+import { createCourse, deleteCourse, duplicateCourse, enrollCourse, getCourses, getEnrollments, hideEnrollment, unhideEnrollment, updateCourse } from '../../api/courses.js'
 
 const PAGE_SIZE = 9
 
@@ -211,11 +211,7 @@ function InstructorCatalog({ user }) {
   })
 
   const duplicateMutation = useMutation({
-    mutationFn: async (id) => {
-      const source = await getCourse(id)
-      const s = source?.data ?? source
-      return createCourse({ title: `Copy of ${s.title}`, description: s.description, status: 'Draft' })
-    },
+    mutationFn: (id) => duplicateCourse(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['courses'] })
     },
