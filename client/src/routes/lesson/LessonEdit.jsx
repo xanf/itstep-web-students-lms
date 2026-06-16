@@ -24,12 +24,12 @@ export function LessonEdit() {
   useEffect(() => {
     if (lesson) {
       setTitle(lesson.title || '')
-      setContent(lesson.content || '')
+      setContent(lesson.contentMarkdown || '')
     }
   }, [lesson])
 
   const save = useMutation({
-    mutationFn: () => apiClient.patch(`/lessons/${lessonId}`, { title, content }),
+    mutationFn: () => apiClient.patch(`/lessons/${lessonId}`, { title, contentMarkdown: content }),
     onSuccess: () => {
       setSaved(true)
       setTimeout(() => setSaved(false), 2500)

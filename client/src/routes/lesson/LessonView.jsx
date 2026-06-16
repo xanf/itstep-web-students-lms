@@ -70,10 +70,10 @@ export function LessonView() {
         background: '#fff', border: '1px solid #e0e0e0', borderRadius: 10,
         padding: 28, lineHeight: 1.8, fontSize: 16, minHeight: 200,
       }}>
-        {lesson.content
+        {lesson.contentMarkdown
           ? (
             <ReactMarkdown remarkPlugins={[remarkGfm]} rehypePlugins={[rehypeRaw]}>
-              {lesson.content}
+              {lesson.contentMarkdown}
             </ReactMarkdown>
           )
           : <span style={{ color: '#aaa' }}>Вміст уроку відсутній</span>
