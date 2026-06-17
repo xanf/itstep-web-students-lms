@@ -121,13 +121,19 @@ export function CourseDetail() {
                 <span style={{ color: '#34a853', fontWeight: 600 }}>✓ Ви записались на курс</span>
                 <button
                   onClick={() => unenroll.mutate()}
-                  disabled={unenroll.isPending || !enrollmentId}
+                  disabled={unenroll.isPending || !enrollmentId || unenroll.isSuccess}
                   style={{
                     padding: '10px 16px', border: '1px solid #e53935', borderRadius: 8,
-                    background: '#fff', color: '#e53935', cursor: 'pointer', fontWeight: 600,
+                    background: unenroll.isSuccess ? '#f5f5f5' : '#fff',
+                    color: unenroll.isSuccess ? '#999' : '#e53935',
+                    cursor: unenroll.isSuccess ? 'default' : 'pointer', fontWeight: 600,
                   }}
                 >
-                  {unenroll.isPending ? 'Скасування...' : 'Скасувати запис'}
+                  {unenroll.isPending
+                    ? 'Скасування...'
+                    : unenroll.isSuccess
+                      ? '✓ Ви скасували запис'
+                      : 'Скасувати запис'}
                 </button>
               </>
             )}
@@ -167,12 +173,12 @@ export function CourseDetail() {
             >
               <div style={{
                 width: 36, height: 36, borderRadius: '50%', flexShrink: 0,
-                background: lesson.completedAt ? '#34a853' : '#e8f0fe',
-                color: lesson.completedAt ? '#fff' : '#1a73e8',
+                background: lesson.completed ? '#34a853' : '#e8f0fe',
+                color: lesson.completed ? '#fff' : '#1a73e8',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontWeight: 700, fontSize: 15,
               }}>
-                {lesson.completedAt ? '✓' : index + 1}
+                {lesson.completed ? '✓' : index + 1}
               </div>
               <div style={{ flex: 1 }}>
                 <div style={{ fontWeight: 500, color: '#222', fontSize: 15 }}>{lesson.title}</div>
@@ -182,7 +188,7 @@ export function CourseDetail() {
                   </div>
                 )}
               </div>
-              {lesson.completedAt && (
+              {lesson.completed && (
                 <span style={{ fontSize: 13, color: '#34a853', fontWeight: 500 }}>Пройдено</span>
               )}
               <span style={{ color: '#aaa', fontSize: 18 }}>›</span>

@@ -60,7 +60,7 @@ export function LessonView() {
         {lesson.publishedAt && (
           <span>Опубліковано: {new Date(lesson.publishedAt).toLocaleDateString('uk-UA')}</span>
         )}
-        {lesson.completedAt && (
+        {lesson.completed && (
           <span style={{ color: '#34a853', fontWeight: 500 }}>✓ Урок завершено</span>
         )}
       </div>
@@ -80,7 +80,7 @@ export function LessonView() {
         }
       </div>
 
-      {user?.role === 'Student' && !lesson.completedAt && (
+      {user?.role === 'Student' && !lesson.completed && (
         <div style={{ marginTop: 24 }}>
           <button
             onClick={() => complete.mutate()}
