@@ -25,7 +25,7 @@ import { StudentDashboard } from './routes/dashboard/StudentDashboard.jsx'
 import { InstructorDashboard } from './routes/dashboard/InstructorDashboard.jsx'
 import { Announcements } from './routes/communications/Announcements.jsx'
 import { CalendarView } from './routes/calendar/CalendarView.jsx'
-import { MaterialsLibrary } from './routes/library/MaterialsLibrary.jsx'
+import MaterialsLibrary from "./routes/library/MaterialsLibrary";
 import { Profile } from './routes/profile/Profile.jsx'
 import { Notifications } from './routes/profile/Notifications.jsx'
 import { UsersList } from './routes/users/UsersList.jsx'
